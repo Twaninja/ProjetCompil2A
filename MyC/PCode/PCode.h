@@ -1,6 +1,6 @@
 /*
  *  PCode.h
- * 
+ *
  *  Created by Janin on 12/11/21.
  *  Copyright 2021 ENSEIRB. All rights reserved.
  *
@@ -21,15 +21,15 @@
 int stack[SIZE];
 
 extern int sp;
-     // Stack pointeur (ou index) qui pointe toujours sur la première
-     // case LIBRE.
-     // On empile en incrémentant sp
-     // On dépile en le décrémentant
+// Stack pointeur (ou index) qui pointe toujours sur la première
+// case LIBRE.
+// On empile en incrémentant sp
+// On dépile en le décrémentant
 
 extern int mp;
-     // Mark pointeur : un pointeur (ou index) qui marque une position fixe,
-     // sur la pile, à partir de laquelle on peut retrouver les données
-     // (paramètres, variables locales) propres au bloc courant.
+// Mark pointeur : un pointeur (ou index) qui marque une position fixe,
+// sur la pile, à partir de laquelle on peut retrouver les données
+// (paramètres, variables locales) propres au bloc courant.
 
 
 /*************************************************/
@@ -87,7 +87,7 @@ extern int mp;
 
 /*****************  NOP ************************************/
 
-#define NOP 
+#define NOP
 
 /*********** Gestion des sous-blocks avec la pile. *********/
 
@@ -98,32 +98,32 @@ extern int mp;
      et l'accès aux arguements de cette fonction */
 
 
-  /*
-     L'objectif de ENTER_BLOCK(N) et EXIT_BLOCK(N) est d'atteindre 
-     l'invariant suivant:
-     (1) dans le bloc courant, la nième variable du bloc courant est 
-     à l'index :
-              mp+n 
-     avec l'index mp+0 reservée à la valeur de retour du bloc
+     /*
+        L'objectif de ENTER_BLOCK(N) et EXIT_BLOCK(N) est d'atteindre
+        l'invariant suivant:
+        (1) dans le bloc courant, la nième variable du bloc courant es 
+        à l'index :
+                 mp+n
+        avec l'index mp+0 reservée à la valeur de retour du bloc
 
-     (2) dans le bloc courant, la nième variable bloc englobant est
-     à l'index : 
-            stack[mp-1] + n
-     
-     Nota : le  mp du bloc englobant est (toujours) stocké à l'index (mp-1).
-     Si mp-1 est négatif, c'est qu'on est dans le bloc du main !!!
+        (2) dans le bloc courant, la nième variable bloc englobant est
+        à l'index  
+               stack[mp-1] + n
 
-     (3) dans le bloc courant, la nième variable du bloc englobant le 
-     bloc englobant est à l'index :
-            stack[stack[mp - 1] - 1] + n
+        Nota : le  mp du bloc englobant est (toujours) stocké à l'index (mp-1).
+        Si mp-1 est négatif, c'est qu'on est dans le bloc du main !!!
 
-     etc...
+        (3) dans le bloc courant, la nième variable du bloc englobant l 
+        bloc englobant est à l'index :
+               stack[stack[mp - 1] - 1] + n
 
-  */
+        etc...
+
+     */
 
 
 
-// restore le sommet de pile (uniquement pour la fin de la fonction main)
+     // restore le sommet de pile (uniquement pour la fin de la fonction main)
 #define EXIT_MAIN sp = mp+1
 
 // sauvegarde le mark pointeur et en définit un nouveau
@@ -134,8 +134,8 @@ extern int mp;
 
 /* EXIT_BLOC(N) effectue, dans l'ordre:
     - restoration du mp,
-    - copie de la valeur de retour à l'emplacement approprié 
-      (sommet de pile de l'appelant). Cette valeur de retour 
+    - copie de la valeur de retour à l'emplacement appropri 
+      (sommet de pile de l'appelant). Cette valeur de retour
       doit se trouver à l'index mp de l'appelé,
     - restoration du sp de l'appelant,
     avec N qui représente le nombre d'arguements (entier !!!) de la fonction.
@@ -146,16 +146,16 @@ extern int mp;
 
 /*
 
-     (4) dans le cas d'un appel de fonction à N arguments, on prendra soin 
-     de charger les arguments de la fonction sur la pile (dans l'ordre 
+     (4) dans le cas d'un appel de fonction à N arguments, on prendra soi 
+     de charger les arguments de la fonction sur la pile (dans l'ordre
      de gauche à droite) avant de faire appel à ENTER_BLOCK(N).
 
-     L'appel d'une fonction f se fait alors en appelant une fonction 
+     L'appel d'une fonction f se fait alors en appelant une fonction
      (qu'on a produit) pcode_f sans arguement.
 
-     Dès lors, le kième argument de la fonction est lu (par l'appelé) 
+     Dès lors, le kième argument de la fonction est lu (par l'appel) 
      dans la pile à l'adresse
-              mp - 1 - (N + k -1) 
+              mp - 1 - (N + k -1)
      Voir les exemples 6 et 7 avec:
         - pcode-ex6.c appel simple à deux arguements
         - pcode-ex7.c appel récursif à un arguement.
@@ -165,11 +165,11 @@ extern int mp;
 /***************************************************/
 /* Autres fonctions pour le debug */
 
-int empty_stack ();
+int empty_stack();
 
-int full_stack ();
+int full_stack();
 
-int valid_stack ();
+int valid_stack();
 
 void print_stack();
 

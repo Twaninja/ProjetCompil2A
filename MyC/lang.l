@@ -7,7 +7,7 @@
 #include "Attribute.h"
 #include <stdio.h>
 
-%} 
+%}
 %% 
 
 "="                      { return EQ;}

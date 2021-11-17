@@ -2,13 +2,8 @@
 
 #include <stdlib.h>
 
-attribute new_attribute () {
-  attribute r;
-  r  = malloc (sizeof (struct ATTRIBUTE));
-  return r;
+attribute new_attribute() {
+    attribute r;
+    r = malloc(sizeof(struct ATTRIBUTE));
+    return r;
 };
-
-
-
-
-
