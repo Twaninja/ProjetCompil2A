@@ -15,7 +15,7 @@ typedef enum { INT, FLOAT } type;
 
 struct ATTRIBUTE {
     char* name;
-    int int_val;           // utilise' pour NUM et uniquement pour NUM
+    int int_val;           // utilisé pour NUM et uniquement pour NUM
     type type_val;
 
     /* les autres attributs dont vous pourriez avoir besoin sont déclarés ici */
@@ -25,6 +25,6 @@ struct ATTRIBUTE {
 typedef struct ATTRIBUTE* attribute;
 
 attribute new_attribute();
-/* returns the pointeur to a newly allocated (but uninitialized) attribute value structure */
+/* returns the pointer to a newly allocated (but uninitialized) attribute value structure */
 
 #endif

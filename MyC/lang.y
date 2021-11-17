@@ -45,38 +45,48 @@ void yyerror (char* s) {
 
 // liste de tous les non terminaux dont vous voulez manipuler l'attribut
 %type <att> exp typename
-         
+
 
 %%
 
-prog : func_list               {}
+prog : func_list                {}
 ;
 
-func_list : func_list fun      {}
-| fun                          {}
+func_list : func_list fun       {}
+| fun                           {}
 ;
-
 
 // I. Functions
 
-fun : type fun_head fun_body   {}
+fun : type fun_head fun_body    {}
 ;
 
-fun_head : ID PO PF            {printf("%s() {\n", $1->name);} // erreur si profondeur diff zero
-| ID PO params PF              {}//{printf("%s(%s)", $1->name, $3->name);}
+fun_head : fun_name po pf       {printf(" {\n");} // erreur si profondeur diff zero
+| fun_name po params pf         {printf(" {\n");}
 ;
 
-params: type ID vir params     {}
-| type ID                      {}
+fun_name : ID                   {printf("%s", $1->name);}
 
-vlist: vlist vir ID            {}
-| ID                           {}
+params : type var vir params    {}
+| type var                      {}
+
+vlist : vlist vir ID            {}
+| ID                            {}
 ;
 
-vir : VIR                      {}
+var : ID                        {printf("%s", $1->name);}
 ;
 
-fun_body : AO block AF         {printf("}\n");}
+vir : VIR                       {printf(",");}
+;
+
+po : PO                         {printf("(");}
+;
+
+pf : PF                         {printf(")");}
+;
+
+fun_body : AO block AF          {printf("}\n");}
 ;
 
 // Block
@@ -84,7 +94,7 @@ block:
 decl_list inst_list            {}
 ;
 
-// I. Declarations
+// II.1 Declarations
 
 decl_list : decl_list decl     {}
 |                              {}
@@ -93,7 +103,9 @@ decl_list : decl_list decl     {}
 decl: var_decl PV              {}
 ;
 
-var_decl : type vlist          {}
+var_decl : type vlist           {
+                                //if ($1->type_val == INT) printf("INTEGER");
+                                }
 ;
 
 type
@@ -109,17 +121,16 @@ typename
 | VOID                          {
                                 $$ = new_attribute();
                                 $$->name = "void";
-                                $$->type_val = VOID;
                                 }
 ;
 
-// II. Intructions
+// II. Instructions
 
-inst_list: inst inst_list   {}
+inst_list : inst inst_list   {}
 | inst                      {}
 ;
 
-pv : PV                       {}
+pv : PV                       {printf(";\n");}
 ;
  
 inst:
@@ -141,7 +152,7 @@ af : AF                       {}
 ;
 
 
-// II.1 Affectations
+// II.2 Affectations
 
 aff : ID EQ exp               {}
 ;
@@ -189,14 +200,14 @@ while : WHILE                 {}
 
 
 // II.3 Expressions
-exp
+exp :
 // II.3.1 Exp. arithmetiques
-: MOINS exp %prec UNA         {}
-         // -x + y lue comme (- x) + y  et pas - (x + y)
-| exp PLUS exp                {printf("ADDI\n");}
-| exp MOINS exp               {printf("SUBI\n");}
-| exp STAR exp                {printf("MULTI\n");}
-| exp DIV exp                 {printf("DIVI\n");}
+MOINS exp %prec UNA         {}
+// -x + y lue comme (- x) + y  et pas - (x + y)
+| exp PLUS exp                {printf("ADDI;\n");}
+| exp MOINS exp               {printf("SUBI;\n");}
+| exp STAR exp                {printf("MULTI;\n");}
+| exp DIV exp                 {printf("DIVI;\n");}
 | PO exp PF                   {}
 | ID                          {}
 | app                         {}
@@ -233,13 +244,12 @@ arglist : exp VIR arglist     {}
 %% 
 int main () {
 
-  /* Ici on peut ouvrir le fichier source, avec les messages 
+    /* Ici on peut ouvrir le fichier source, avec les messages 
      d'erreur usuel si besoin, et rediriger l'entrée standard 
      sur ce fichier pour lancer dessus la compilation.
-   */
+    */
 
-printf ("Compiling MyC source code into PCode (Version 2021) !\n\n");
-return yyparse ();
- 
+    printf("Compiling MyC source code into PCode (Version 2021) !\n\n");
+    return yyparse();
 } 
 

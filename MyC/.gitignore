@@ -1,0 +1,9 @@
+# Lex output
+lex.yy.c
+
+# Yacc output
+y.output
+y.tab.[ch]
+
+# Main
+lang
