@@ -20,55 +20,55 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.  */
 
-   /* As a special exception, you may create a larger work that contains
-      part or all of the Bison parser skeleton and distribute that work
-      under terms of your choice, so long as that work isn't itself a
-      parser generator using the skeleton or a modified version thereof
-      as a parser skeleton.  Alternatively, if you modify or redistribute
-      the parser skeleton itself, you may (at your option) remove this
-      special exception, which will cause the skeleton and the resulting
-      Bison output files to be licensed under the GNU General Public
-      License without this special exception.
+/* As a special exception, you may create a larger work that contains
+   part or all of the Bison parser skeleton and distribute that work
+   under terms of your choice, so long as that work isn't itself a
+   parser generator using the skeleton or a modified version thereof
+   as a parser skeleton.  Alternatively, if you modify or redistribute
+   the parser skeleton itself, you may (at your option) remove this
+   special exception, which will cause the skeleton and the resulting
+   Bison output files to be licensed under the GNU General Public
+   License without this special exception.
 
-      This special exception was added by the Free Software Foundation in
-      version 2.2 of Bison.  */
+   This special exception was added by the Free Software Foundation in
+   version 2.2 of Bison.  */
 
-      /* Tokens.  */
+/* Tokens.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
-enum yytokentype {
-    NUM = 258,
-    TINT = 259,
-    ID = 260,
-    AO = 261,
-    AF = 262,
-    PO = 263,
-    PF = 264,
-    PV = 265,
-    VIR = 266,
-    RETURN = 267,
-    VOID = 268,
-    EQ = 269,
-    IF = 270,
-    ELSE = 271,
-    WHILE = 272,
-    AND = 273,
-    OR = 274,
-    NOT = 275,
-    DIFF = 276,
-    EQUAL = 277,
-    SUP = 278,
-    INF = 279,
-    PLUS = 280,
-    MOINS = 281,
-    STAR = 282,
-    DIV = 283,
-    DOT = 284,
-    ARR = 285,
-    UNA = 286
-};
+   enum yytokentype {
+     NUM = 258,
+     TINT = 259,
+     ID = 260,
+     AO = 261,
+     AF = 262,
+     PO = 263,
+     PF = 264,
+     PV = 265,
+     VIR = 266,
+     RETURN = 267,
+     VOID = 268,
+     EQ = 269,
+     IF = 270,
+     ELSE = 271,
+     WHILE = 272,
+     AND = 273,
+     OR = 274,
+     NOT = 275,
+     DIFF = 276,
+     EQUAL = 277,
+     SUP = 278,
+     INF = 279,
+     PLUS = 280,
+     MOINS = 281,
+     STAR = 282,
+     DIV = 283,
+     DOT = 284,
+     ARR = 285,
+     UNA = 286
+   };
 #endif
 /* Tokens.  */
 #define NUM 258
@@ -107,15 +107,16 @@ enum yytokentype {
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 #line 19 "lang.y"
-{
-    struct ATTRIBUTE* att;
+{ 
+    struct ATTRIBUTE * att;
 }
 /* Line 1529 of yacc.c.  */
 #line 115 "y.tab.h"
-YYSTYPE;
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
 #endif
 
 extern YYSTYPE yylval;
+
