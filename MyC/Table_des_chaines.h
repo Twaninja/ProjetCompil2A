@@ -30,4 +30,3 @@ char * sid_to_string(sid i);
 int sid_valid(sid i);
 
 #endif
-

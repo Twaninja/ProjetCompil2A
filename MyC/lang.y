@@ -5,19 +5,19 @@
 #include "PCode/PCode.h"
 
 #include <stdio.h>
-  
+
 extern int yylex();
 extern int yyparse();
 
 void yyerror (char* s) {
-  printf ("%s\n",s);
-  }
+    printf ("%s\n",s);
+}
 		
 
 %}
 
 %union { 
-	struct ATTRIBUTE * att;
+    struct ATTRIBUTE * att;
 }
 
 %token <att> NUM
@@ -44,8 +44,8 @@ void yyerror (char* s) {
 %start prog  
 
 // liste de tous les non terminaux dont vous voulez manipuler l'attribut
-%type <att> exp  typename
-         
+%type <att> exp typename
+
 
 %%
 
@@ -225,13 +225,12 @@ arglist : exp VIR arglist     {}
 %% 
 int main () {
 
-  /* Ici on peut ouvrir le fichier source, avec les messages 
-     d'erreur usuel si besoin, et rediriger l'entrée standard 
-     sur ce fichier pour lancer dessus la compilation.
-   */
+    /* Ici on peut ouvrir le fichier source, avec les messages 
+        d'erreur usuel si besoin, et rediriger l'entrée standard 
+        sur ce fichier pour lancer dessus la compilation.
+    */
 
-printf ("Compiling MyC source code into PCode (Version 2021) !\n\n");
-return yyparse ();
+    printf ("Compiling MyC source code into PCode (Version 2021) !\n\n");
+    return yyparse ();
  
 } 
-
