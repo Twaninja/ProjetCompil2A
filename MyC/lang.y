@@ -185,14 +185,14 @@ exp
 // II.3.1 Exp. arithmetiques
 : MOINS exp %prec UNA         {}
          // -x + y lue comme (- x) + y  et pas - (x + y)
-| exp PLUS exp                {}
-| exp MOINS exp               {}
-| exp STAR exp                {}
-| exp DIV exp                 {}
+| exp PLUS exp                {printf("ADDI\n");}
+| exp MOINS exp               {printf("SUBI\n");}
+| exp STAR exp                {printf("MULTI\n");}
+| exp DIV exp                 {printf("ADDI\n");}
 | PO exp PF                   {}
 | ID                          {}
 | app                         {}
-| NUM                         {}
+| NUM                         {printf("LOAD(%i);\n", $1->int_val);}
 
 
 // II.3.2. Booléens
