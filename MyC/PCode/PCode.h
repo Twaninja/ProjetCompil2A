@@ -67,6 +67,10 @@ extern int mp;
 
 // Comparaisons
 
+// #define EQUAL stack[sp - 2] = stack[sp - 2] == stack[sp - 1]; sp--
+
+// #define DIFF stack[sp - 2] = stack[sp - 2] != stack[sp - 1]; sp--
+
 #define LT stack[sp - 2] = stack[sp - 2] < stack[sp - 1]; sp--
 
 #define GT stack[sp - 2] = stack[sp - 2] > stack[sp - 1]; sp--
@@ -74,6 +78,11 @@ extern int mp;
 #define LEQ stack[sp - 2] = stack[sp - 2] <= stack[sp - 1]; sp--
 
 #define GEQ stack[sp - 2] = stack[sp - 2] >= stack[sp - 1]; sp--
+
+// #define AND stack[sp - 2] = stack[sp - 2] & stack[sp - 1]; sp--
+
+// #define OR stack[sp - 2] = stack[sp - 2] | stack[sp - 1]; sp--
+
 
 /*************************** Branchements ******************/
 // La condition est en sommet de pile et elle est dépilée après le test

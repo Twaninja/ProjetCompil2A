@@ -12,12 +12,12 @@ extern int yyparse();
 void yyerror (char* s) {
   printf ("%s\n",s);
   }
-		
+    
 
 %}
 
 %union { 
-	struct ATTRIBUTE * att;
+  struct ATTRIBUTE * att;
 }
 
 %token <att> NUM
@@ -44,7 +44,7 @@ void yyerror (char* s) {
 %start prog  
 
 // liste de tous les non terminaux dont vous voulez manipuler l'attribut
-%type <att> exp  typename
+%type <att> exp typename
          
 
 %%
@@ -59,11 +59,11 @@ func_list : func_list fun      {}
 
 // I. Functions
 
-fun : type fun_head fun_body        {}
+fun : type fun_head fun_body   {}
 ;
 
-fun_head : ID PO PF            {} // erreur si profondeur diff zero
-| ID PO params PF              {}
+fun_head : ID PO PF            {printf("%s() {\n", $1->name);} // erreur si profondeur diff zero
+| ID PO params PF              {}//{printf("%s(%s)", $1->name, $3->name);}
 ;
 
 params: type ID vir params     {}
@@ -76,7 +76,7 @@ vlist: vlist vir ID            {}
 vir : VIR                      {}
 ;
 
-fun_body : AO block AF         {}
+fun_body : AO block AF         {printf("}\n");}
 ;
 
 // Block
@@ -97,12 +97,20 @@ var_decl : type vlist          {}
 ;
 
 type
-: typename                     {}
+: typename                     {printf("%s ", $1->name);}
 ;
 
 typename
-: TINT                          {}
-| VOID                          {}
+: TINT                          {
+                                $$ = new_attribute();
+                                $$->name = "int";
+                                $$->type_val = INT;
+                                }
+| VOID                          {
+                                $$ = new_attribute();
+                                $$->name = "void";
+                                $$->type_val = VOID;
+                                }
 ;
 
 // II. Intructions
@@ -188,7 +196,7 @@ exp
 | exp PLUS exp                {printf("ADDI\n");}
 | exp MOINS exp               {printf("SUBI\n");}
 | exp STAR exp                {printf("MULTI\n");}
-| exp DIV exp                 {printf("ADDI\n");}
+| exp DIV exp                 {printf("DIVI\n");}
 | PO exp PF                   {}
 | ID                          {}
 | app                         {}
@@ -198,12 +206,12 @@ exp
 // II.3.2. Booléens
 
 | NOT exp %prec UNA           {}
-| exp INF exp                 {}
-| exp SUP exp                 {}
-| exp EQUAL exp               {}
-| exp DIFF exp                {}
-| exp AND exp                 {}
-| exp OR exp                  {}
+| exp INF exp                 {printf("LT\n");}
+| exp SUP exp                 {printf("GT\n");}
+| exp EQUAL exp               {printf("EQUAL\n");}
+| exp DIFF exp                {printf("DIFF\n");}
+| exp AND exp                 {printf("AND\n");}
+| exp OR exp                  {printf("OR\n");}
 
 ;
 
